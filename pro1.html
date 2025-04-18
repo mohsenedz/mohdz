@@ -1,23 +1,249 @@
-<form action="https://formsubmit.co/mohsendebih@gmail.com" method="POST">
-  <!-- حقل الاسم -->
-  <input type="text" name="الاسم" placeholder="الاسم" required>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dr. Mustapha - Facharzt für Allgemeinmedizin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  
+ 
+ 
 
-  <!-- حقل اللقب -->
-  <input type="text" name="اللقب" placeholder="اللقب" required>
+  
+  <style>
+  
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+  
+   /* Loader */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
 
-  <!-- رقم الهاتف -->
-  <input type="Number" name="رقم الهاتف" placeholder="رقم الهاتف" required>
+    #loader::after {
+      content: "";
+      width: 50px;
+      height: 50px;
+      border: 5px solid #1976d2;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 4s linear 1;
+    }
 
-  <!-- حماية من السبام -->
-  <input type="text" name="_honey" style="display:none">
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+  
+  
+  
+  
+  
+  
+  
+    header {
+      background-color: #1976d2;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+   
+   
+   
+   
+   
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 1.2rem;
+    }
+    nav {
+   // text-align: center;
+ 
+  
+      background-color: #1565c0;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      border:2px solid #1565c0;
+      background-color:#1565c0;
+    }
+    section {
+      padding: 50px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section h2 {
+      color: #1976d2;
+      margin-bottom: 20px;
+    }
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .service {
+      flex: 1 1 250px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .service i {
+      font-size: 2rem;
+      color: #1976d2;
+      margin-bottom: 10px;
+    }
+    .contact {
+      background-color: #e3f2fd;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    footer {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .service:hover {
+  transform: scale(1.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+    
+    
+    //حركة الايقونات//
+    
+    .service i {
+  font-size: 2rem;
+  color: #1976d2 ;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
 
-  <!-- تعطيل Captcha -->
-  <input type="hidden" name="_captcha" value="false">
+.service:hover i {
+  transform: scale(1.2) rotate(10deg);
+}
+    
+    
+    
+    
+    //الكتابة التلقائية//
+    
+.typing-text {
+  width: 25ch;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid white;
+  animation: typing 4s steps(25), blink 0.7s step-end infinite;
+  font-size: 1.5rem;
+  margin-top: 15px;
+}
 
-  <!-- تحديد عنوان الرسالة -->
-  <input type="hidden" name="_subject" value="حجز">
-<hr>
-  <!-- زر الإرسال -->
+@keyframes typing {
+  from { width: 0 }
+  to { width: 25ch }
+}
 
-  <button type="submit">إرسال</button>
-</form>
+@keyframes blink {
+  50% { border-color: transparent }
+}
+    
+  </style>
+</head>
+<body>
+  <header>
+     <div id="loader"></div>
+    <h1>Dr. Mustapha</h1>
+   <h2 class="typing-text">Willkommen bei Dr. Mustapha</h2>
+    <p>Facharzt für Allgemeinmedizin</p>
+  </header>
+
+  <nav>
+    <a href="#about">Über mich</a>
+    <a href="#services">Leistungen</a>
+    <a href="#contact">Kontakt</a>
+  </nav>
+
+  <section id="about">
+    <h2>Über mich</h2>
+    <p>Ich bin Dr. Mustapha, seit über 10 Jahren als Allgemeinarzt tätig. Ich biete individuelle und ganzheitliche medizinische Betreuung für alle Altersgruppen.</p>
+  </section>
+
+ 
+  <section id="services"> 
+    <h2>Unsere Leistungen</h2>
+    <div class="services">
+      <div class="service">  
+        <i class="fas fa-stethoscope"></i>
+        <h3>Allgemeine Untersuchung</h3>
+        <p>Regelmäßige Check-ups zur Gesundheitsvorsorge.</p>
+      </div>
+      <div class="service">
+       
+        <i class="fas fa-syringe"></i>
+        <h3>Impfungen</h3>
+        <p>Alle gängigen Schutzimpfungen für Kinder und Erwachsene.</p>
+      </div>
+      <div class="service">
+        <i class="fas fa-heartbeat"></i>  
+        <h3>EKG & Blutdruck</h3>
+        <p>Kontrolle von Herz-Kreislauf-Erkrankungen.</p>
+      </div>
+    </div>
+    
+  
+  </section>
+
+
+  <section id="contact">
+    <h2>Kontakt</h2>
+    <div class="contact">
+      <p><strong>Telefon:</strong> 0123 456789</p>
+      <p><strong>E-Mail:</strong> kontakt@drmustapha.de</p>
+      <p><strong>Adresse:</strong> Musterstraße 1, 12345 Musterstadt</p>
+    </div>
+  </section>
+
+
+
+  <footer>
+    <p>&copy; Alle Rechte vorbehalten.</p>
+  </footer>
+  
+  
+
+<!-- JavaScript to hide loader after 6 seconds -->
+  <script>
+    window.addEventListener("load", function () {
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+      }, 4000);
+    });
+  </script>
+</body>
+</html>
