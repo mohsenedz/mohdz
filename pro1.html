@@ -149,29 +149,21 @@
   transform: scale(1.2) rotate(10deg);
 }
     
+    /*خاص بالروابط*/
     
-    
-    
-    //الكتابة التلقائية//
-    
-.typing-text {
-  width: 25ch;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid white;
-  animation: typing 4s steps(25), blink 0.7s step-end infinite;
-  font-size: 1.5rem;
-  margin-top: 15px;
+ .m1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* يضيف مسافة بين العناصر تلقائيًا */
+  padding:50px;
+  font-weight: bold;
+  
 }
-
-@keyframes typing {
-  from { width: 0 }
-  to { width: 25ch }
-}
-
-@keyframes blink {
-  50% { border-color: transparent }
-}
+  
+     
+     
+ 
     
   </style>
 </head>
@@ -179,41 +171,74 @@
   <header>
      <div id="loader"></div>
     <h1>Dr. Mustapha</h1>
-   <h2 class="typing-text">Willkommen bei Dr. Mustapha</h2>
+   
     <p>Facharzt für Allgemeinmedizin</p>
   </header>
 
   <nav>
-    <a href="#about">Über mich</a>
-    <a href="#services">Leistungen</a>
-    <a href="#contact">Kontakt</a>
+    <a href="#m3">Appointment</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
   </nav>
 
   <section id="about">
-    <h2>Über mich</h2>
+    <h2>about me </h2>
     <p>Ich bin Dr. Mustapha, seit über 10 Jahren als Allgemeinarzt tätig. Ich biete individuelle und ganzheitliche medizinische Betreuung für alle Altersgruppen.</p>
   </section>
 
  
   <section id="services"> 
-    <h2>Unsere Leistungen</h2>
+    <h2>Our Services</h2>
     <div class="services">
       <div class="service">  
         <i class="fas fa-stethoscope"></i>
-        <h3>Allgemeine Untersuchung</h3>
+        <h3>General Check-up</h3>
         <p>Regelmäßige Check-ups zur Gesundheitsvorsorge.</p>
       </div>
       <div class="service">
        
         <i class="fas fa-syringe"></i>
-        <h3>Impfungen</h3>
+        <h3>Vaccinations</h3>
         <p>Alle gängigen Schutzimpfungen für Kinder und Erwachsene.</p>
       </div>
       <div class="service">
         <i class="fas fa-heartbeat"></i>  
-        <h3>EKG & Blutdruck</h3>
+        <h3>ECG & Blood Pressure</h3>
         <p>Kontrolle von Herz-Kreislauf-Erkrankungen.</p>
       </div>
+      
+    
+    
+      <div class="service">
+  <i class="fas fa-calendar-check"></i>
+  <h3 id="m3">Appointment Booking</h3>
+  <p>Online oder telefonisch einen Arzttermin vereinbaren.</p>
+</div>
+     
+     
+      <div class="service">
+      
+        <i class="fas fa-bell"></i>
+        <h3>Follow us:</h3>
+      
+      <div class="m1">
+        <a href="https://facebook.com" target="_blank" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: black;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Logo" width="20" height="20">
+  facebook.com
+</a>
+       
+       <a href="https://youtube.com/@yourchannel" target="_blank" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: black;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube Logo" width="20" height="20">
+    youtube.com
+  </a>
+       
+        <a href="https://instagram.com/yourusername" target="_blank" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: black;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo" width="20" height="20">
+    instagram.com
+  </a>
+    </div>
+      </div>
+      
     </div>
     
   
@@ -221,7 +246,7 @@
 
 
   <section id="contact">
-    <h2>Kontakt</h2>
+    <h2>contact</h2>
     <div class="contact">
       <p><strong>Telefon:</strong> 0123 456789</p>
       <p><strong>E-Mail:</strong> kontakt@drmustapha.de</p>
