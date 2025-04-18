@@ -162,9 +162,41 @@
 }
   
      
-     
+     /*خاص بالصور المتغير تلقائيا*/
  
-    
+    #slider {
+
+    width: 100%;
+
+    max-width: 600px;
+
+    height: auto;
+
+    margin: auto;
+
+    overflow: hidden;
+
+  }
+
+
+  #slider img {
+
+    width: 100%;
+
+    height: auto;
+
+    display: none;
+
+  }
+
+
+  #slider img.active {
+
+    display: block;
+
+  }
+
+
   </style>
 </head>
 <body>
@@ -186,6 +218,26 @@
     <p>Ich bin Dr. Mustapha, seit über 10 Jahren als Allgemeinarzt tätig. Ich biete individuelle und ganzheitliche medizinische Betreuung für alle Altersgruppen.</p>
   </section>
 
+ 
+ 
+ <div id="slider">
+  <img src="img11.jpg" class="active">
+  <img src="img22.jpg">
+  <img src="img33.jpg">
+</div>
+
+<script>
+  let images = document.querySelectorAll("#slider img");
+  let current = 0;
+
+  setInterval(() => {
+    images[current].classList.remove("active");
+    current = (current + 1) % images.length;
+    images[current].classList.add("active");
+  }, 3000);
+</script>
+ 
+ 
  
   <section id="services"> 
     <h2>Our Services</h2>
