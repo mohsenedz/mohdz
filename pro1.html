@@ -9,8 +9,8 @@
   
   
  
- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   
   <style>
@@ -455,23 +455,6 @@
 
 
 
-  
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("bookingForm");
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const appointment = document.getElementById("appointment").value;
-    const firstName = document.getElementById("firstName").value;
-    const lastName = document.getElementById("lastName").value;
-    const email = document.getElementById("email").value;
-    const message = document.getElementById("message").value;
-
-    const submitButton = form.querySelector("button[type='submit']");
-    submitButton.disabled = true;
-
-<script>
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("bookingForm");
 
@@ -529,8 +512,9 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 });
-</script>
+
+
+    
+  </script>
 </body>
 </html>
-
-                        
