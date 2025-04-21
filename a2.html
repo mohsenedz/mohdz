@@ -92,9 +92,32 @@ body {
       color: #333;
       font-size: 14px;
     }
+
+
+.wrapper {
+  max-width: 100vw;      /* لا يتجاوز عرض الشاشة */
+  overflow-x: hidden;    /* يمنع التمرير الأفقي */
+}
+
+
+    
   </style>
 </head>
 <body>
+
+
+  
+  <div class="wrapper">
+    <!-- كل شيء هنا -->
+    <div class="form-container">
+      
+    
+  
+
+
+
+
+  
   <div class="form-container" id="pdfContent">
     <h2>Dr. Ahmed Clinic</h2>
     <form id="bookingForm">
@@ -131,6 +154,10 @@ body {
       <div class="alert" id="alertBox"></div>
     </form>
   </div>
+
+</div>
+  </div>
+  
 
 <script>
   const form = document.getElementById("bookingForm");
