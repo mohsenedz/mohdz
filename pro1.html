@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
   
- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
  
  
 
@@ -450,32 +449,54 @@
         document.getElementById("loader").style.display = "none";
       }, 4000);
     });
-    
-    
-    
-    
-    
-    
+
+
+
+
+
   document.getElementById("bookingForm").addEventListener("submit", function(e) {
-    e.preventDefault(); // منع إعادة التحميل
+    e.preventDefault();
+
+    const appointment = document.getElementById("appointment").value;
+    const firstName = document.getElementById("firstName").value;
+    const lastName = document.getElementById("lastName").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
 
     const button = document.querySelector("button[type='submit']");
-    button.disabled = true; // تعطيل الزر
+    button.disabled = true;
     button.textContent = "Generating PDF...";
 
-    const element = document.getElementById("pdfContent");
+    // إنشاء محتوى جديد للـ PDF
+    const pdfHTML = `
+      <div style="font-family: Roboto, sans-serif; padding: 30px;">
+        <h2 style="color: #1976d2; text-align: center;">Booking Confirmation</h2>
+        <p><strong>Appointment Date:</strong> ${appointment}</p>
+        <p><strong>First Name:</strong> ${firstName}</p>
+        <p><strong>Last Name:</strong> ${lastName}</p>
+        <p><strong>Email Address:</strong> ${email}</p>
+        <p><strong>Message:</strong><br>${message.replace(/\n/g, "<br>")}</p>
+        <hr>
+        <p style="font-size: 12px; color: gray;">Please bring this confirmation with you to the clinic.</p>
+      </div>
+    `;
+
+    // عنصر مؤقت لتوليد PDF
+    const tempElement = document.createElement("div");
+    tempElement.innerHTML = pdfHTML;
+    document.body.appendChild(tempElement);
 
     const opt = {
       margin:       0.5,
       filename:     'booking_confirmation.pdf',
       image:        { type: 'jpeg', quality: 0.98 },
       html2canvas:  { scale: 2 },
-      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
 
-    // توليد الـ PDF
-    html2pdf().set(opt).from(element).save().then(() => {
-      button.style.display = "none"; // إخفاء الزر
+    html2pdf().set(opt).from(tempElement).save().then(() => {
+      tempElement.remove();
+      button.style.display = "none";
 
       // إعادة التوجيه للصفحة الرئيسية بعد 4 ثوانٍ
       setTimeout(() => {
@@ -485,10 +506,6 @@
   });
 
 
-    
-    
-    
   </script>
-  
 </body>
 </html>
