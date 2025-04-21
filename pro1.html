@@ -9,7 +9,7 @@
   
   
  
- 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   
   <style>
@@ -188,6 +188,78 @@
   display: block;
 }
 
+
+
+  .form-container {
+      background-color: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      color: #1976d2;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #1565c0;
+    }
+
+    .alert {
+      margin-top: 15px;
+      color: red;
+      text-align: center;
+    }
+
+    .footer-box {
+      margin-top: 30px;
+      border: 2px solid #1976d2;
+      padding: 15px;
+      border-radius: 8px;
+      color: #333;
+      font-size: 14px;
+    }
+
   </style>
 </head>
 <body>
@@ -254,7 +326,7 @@
    
     
       <div class="service">   
- <h3 id="m3" style="position: relative; top: -80px; height: 0; margin: 0; padding: 0;"></h3>
+ 
   <i class="fas fa-calendar-check"></i>
   <h3 >Appointment Booking</h3>
   <div class="m2">
@@ -278,7 +350,47 @@
   </div>
 </div>
      
+   
      
+      <div class="form-container" id="pdfContent">
+  <h3 id="m3" style="position: relative; top: -80px; height: 0; margin: 0; padding: 0;"></h3>
+    <h2>Dr. Ahmed Clinic</h2>
+    <form id="bookingForm">
+      <div class="form-group">
+        <label for="appointment">Appointment:</label>
+        <input type="date" id="appointment" name="appointment" required>
+      </div>
+
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+      </div>
+
+      <div id="pdfNote" style="display: none; border: 1px solid #ccc; padding: 10px; margin-top: 20px;">
+  Please bring this booking confirmation with you to the clinic.  
+</div>
+
+      <button type="submit">Book Appointment</button>
+      <div class="alert" id="alertBox"></div>
+    </form>
+  </div>
+     
+    
       <div class="service">
       
         <i class="fas fa-bell"></i>
@@ -332,6 +444,64 @@
         document.getElementById("loader").style.display = "none";
       }, 4000);
     });
+    
+    
+   
+    
+    
+    
+    const form = document.getElementById("bookingForm");
+  const alertBox = document.getElementById("alertBox");
+
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const appointment = document.getElementById("appointment").value;
+    const message = document.getElementById("message").value.trim();
+    const button = form.querySelector("button");
+
+    if (firstName && lastName && email && message && appointment) {
+      alertBox.style.color = "green";
+      alertBox.textContent = "Booking submitted successfully! Generating PDF...";
+
+      // إخفاء الزر والإطار أثناء توليد PDF
+      button.style.display = "none";
+      const note = document.getElementById("pdfNote");
+      if (note) note.style.display = "block";
+
+      const element = document.getElementById("pdfContent");
+
+      const opt = {
+        margin:       0,
+        filename:     'booking.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      await html2pdf().set(opt).from(element).save();
+
+      // إظهار الزر وإخفاء الإطار بعد الانتهاء
+      button.style.display = "block";
+      if (note) note.style.display = "none";
+
+      form.reset();
+
+      // إخفاء الرسالة بعد 3 ثوانٍ (اختياري)
+      setTimeout(() => {
+        alertBox.textContent = "";
+      }, 3000);
+    } else {
+      alertBox.style.color = "red";
+      alertBox.textContent = "Please fill in all fields.";
+    }
+  });
+    
+    
+    
   </script>
 </body>
 </html>
