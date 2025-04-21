@@ -395,7 +395,26 @@
       <div class="alert" id="alertBox"></div>
     </form>
   </div>
-     
+
+
+
+
+
+<div id="pdfExport" style="display: none; padding: 20px; font-family: Roboto, sans-serif;">
+  <h2 style="color: #1976d2; text-align: center;">Booking Confirmation</h2>
+  <p><strong>Appointment Date:</strong> <span id="exportAppointment"></span></p>
+  <p><strong>First Name:</strong> <span id="exportFirstName"></span></p>
+  <p><strong>Last Name:</strong> <span id="exportLastName"></span></p>
+  <p><strong>Email:</strong> <span id="exportEmail"></span></p>
+  <p><strong>Message:</strong><br><span id="exportMessage"></span></p>
+  <hr>
+  <p style="font-size: 12px; color: gray;">Please bring this confirmation with you to the clinic.</p>
+</div>
+      
+
+
+
+      
      
       <div class="service">
       
@@ -455,6 +474,7 @@
 
 
 
+
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("bookingForm");
 
@@ -468,32 +488,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const email = document.getElementById("email").value;
     const message = document.getElementById("message").value;
 
-    // إخفاء زر الحجز مؤقتًا
+    // تعبئة البيانات داخل الـ div المخفي
+    document.getElementById("exportAppointment").textContent = appointment;
+    document.getElementById("exportFirstName").textContent = firstName;
+    document.getElementById("exportLastName").textContent = lastName;
+    document.getElementById("exportEmail").textContent = email;
+    document.getElementById("exportMessage").innerHTML = message.replace(/\n/g, "<br>");
+
+    // إظهار العنصر مؤقتًا
+    const exportDiv = document.getElementById("pdfExport");
+    exportDiv.style.display = "block";
+
     const button = form.querySelector("button[type='submit']");
     button.disabled = true;
     button.textContent = "Generating PDF...";
 
-    // إنشاء عنصر مؤقت HTML لتوليد PDF منه
-    const pdfWrapper = document.createElement("div");
-    pdfWrapper.style.fontFamily = "Roboto, sans-serif";
-    pdfWrapper.style.padding = "30px";
-
-    pdfWrapper.innerHTML = `
-      <h2 style="color: #1976d2; text-align: center;">Booking Confirmation</h2>
-      <p><strong>Appointment Date:</strong> ${appointment}</p>
-      <p><strong>First Name:</strong> ${firstName}</p>
-      <p><strong>Last Name:</strong> ${lastName}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Message:</strong><br>${message.replace(/\n/g, "<br>")}</p>
-      <hr>
-      <p style="font-size: 12px; color: gray;">Please bring this confirmation with you to the clinic.</p>
-    `;
-
-    document.body.appendChild(pdfWrapper);
-
-    // توليد PDF من العنصر المؤقت
+    // توليد PDF من العنصر الظاهر
     html2pdf()
-      .from(pdfWrapper)
+      .from(exportDiv)
       .set({
         margin: 0.5,
         filename: 'booking_confirmation.pdf',
@@ -503,15 +515,15 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .save()
       .then(() => {
-        pdfWrapper.remove(); // إزالة العنصر من الصفحة بعد التوليد
-        button.style.display = "none"; // إخفاء الزر
-        // إعادة التوجيه للصفحة الرئيسية بعد 4 ثواني
+        exportDiv.style.display = "none";
+        button.style.display = "none";
         setTimeout(() => {
           window.location.href = window.location.origin + window.location.pathname;
         }, 4000);
       });
   });
 });
+
 
 
     
