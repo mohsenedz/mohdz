@@ -7,8 +7,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   
-  /*خاص بالحجز*/
+  
  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+ 
  
 
   
@@ -187,7 +188,14 @@
 #slider img.active {
   display: block;
 }
-/*خااص بالحجز*/
+
+
+
+
+
+
+
+
 
 .form-container {
       background-color: #ffffff;
@@ -258,6 +266,8 @@
       color: #333;
       font-size: 14px;
     }
+
+
   </style>
 </head>
 <body>
@@ -286,47 +296,6 @@
   <img src="img22.jpg">
   <img src="img33.jpg">
 </div>
-
-
-/*خاص بالحجز*/
-
-<div class="form-container" id="pdfContent">
-    <h2>Dr. Ahmed Clinic</h2>
-    <form id="bookingForm">
-      <div class="form-group">
-        <label for="appointment">Appointment:</label>
-        <input type="date" id="appointment" name="appointment" required>
-      </div>
-
-      <div class="form-group">
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" required>
-      </div>
-
-      <div class="form-group">
-        <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" required>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-
-      <div class="form-group">
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
-      </div>
-
-      <div id="pdfNote" style="display: none; border: 1px solid #ccc; padding: 10px; margin-top: 20px;">
-  Please bring this booking confirmation with you to the clinic.  
-</div>
-
-      <button type="submit">Booking</button>
-      <div class="alert" id="alertBox"></div>
-    </form>
-  </div>
-  
 
 <script>
   let images = document.querySelectorAll("#slider img");
@@ -390,6 +359,44 @@
 </div>
      
      
+     <div class="form-container" id="pdfContent">
+    <h2>Dr. Ahmed Clinic</h2>
+    <form id="bookingForm">
+      <div class="form-group">
+        <label for="appointment">Appointment:</label>
+        <input type="date" id="appointment" name="appointment" required>
+      </div>
+
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+      </div>
+
+      <div id="pdfNote" style="display: none; border: 1px solid #ccc; padding: 10px; margin-top: 20px;">
+  Please bring this booking confirmation with you to the clinic.  
+</div>
+
+      <button type="submit">Booking</button>
+      <div class="alert" id="alertBox"></div>
+    </form>
+  </div>
+     
+     
       <div class="service">
       
         <i class="fas fa-bell"></i>
@@ -444,59 +451,44 @@
       }, 4000);
     });
     
-    /*خاص بالحجز*/
     
-    const form = document.getElementById("bookingForm");
-  const alertBox = document.getElementById("alertBox");
+    
+    
+    
+    
+  document.getElementById("bookingForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // منع إعادة التحميل
 
-  form.addEventListener("submit", async function(e) {
-    e.preventDefault();
+    const button = document.querySelector("button[type='submit']");
+    button.disabled = true; // تعطيل الزر
+    button.textContent = "Generating PDF...";
 
-    const firstName = document.getElementById("firstName").value.trim();
-    const lastName = document.getElementById("lastName").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const appointment = document.getElementById("appointment").value;
-    const message = document.getElementById("message").value.trim();
-    const button = form.querySelector("button");
+    const element = document.getElementById("pdfContent");
 
-    if (firstName && lastName && email && message && appointment) {
-      alertBox.style.color = "green";
-      alertBox.textContent = "Booking submitted successfully! Generating PDF...";
+    const opt = {
+      margin:       0.5,
+      filename:     'booking_confirmation.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
 
-      // إخفاء الزر والإطار أثناء توليد PDF
-      button.style.display = "none";
-      const note = document.getElementById("pdfNote");
-      if (note) note.style.display = "block";
+    // توليد الـ PDF
+    html2pdf().set(opt).from(element).save().then(() => {
+      button.style.display = "none"; // إخفاء الزر
 
-      const element = document.getElementById("pdfContent");
-
-      const opt = {
-        margin:       0,
-        filename:     'booking.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-
-      await html2pdf().set(opt).from(element).save();
-
-      // إظهار الزر وإخفاء الإطار بعد الانتهاء
-      button.style.display = "block";
-      if (note) note.style.display = "none";
-
-      form.reset();
-
-      // إخفاء الرسالة بعد 3 ثوانٍ (اختياري)
+      // إعادة التوجيه للصفحة الرئيسية بعد 4 ثوانٍ
       setTimeout(() => {
-        alertBox.textContent = "";
-      }, 3000);
-    } else {
-      alertBox.style.color = "red";
-      alertBox.textContent = "Please fill in all fields.";
-    }
+        window.location.href = window.location.origin + window.location.pathname;
+      }, 4000);
+    });
   });
+
+
+    
     
     
   </script>
+  
 </body>
 </html>
