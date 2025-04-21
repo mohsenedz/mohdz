@@ -5,23 +5,27 @@
   <title>Booking Form</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
-       
-    
-    
-    
-    
-    
-    
-    
-    .form-container {
-      background-color: #ffffff;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 500px;
-      position: relative;
-    }
+    body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f1f1f1;
+}
+
+.form-container {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
+}
 
     .form-container h2 {
       text-align: center;
@@ -85,8 +89,6 @@
   </style>
 </head>
 <body>
- 
- 
   <div class="form-container" id="pdfContent">
     <h2>Dr. Ahmed Clinic</h2>
     <form id="bookingForm">
@@ -123,7 +125,7 @@
       <div class="alert" id="alertBox"></div>
     </form>
   </div>
-</section>
+
 <script>
   const form = document.getElementById("bookingForm");
   const alertBox = document.getElementById("alertBox");
@@ -174,6 +176,6 @@
       alertBox.textContent = "Please fill in all fields.";
     }
   });
-
+</script>
 </body>
 </html>
