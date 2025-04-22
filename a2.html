@@ -7,31 +7,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
   <style>
-body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  width: 100vw;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f1f1f1;
-  overflow: hidden; /* لمنع التمرير على مستوى الصفحة */
-}
 
-.form-container {
-  background-color: #ffffff;
-  padding: 30px 40px;
-  width: 100%;
-  max-width: 500px; /* NEW */
-  margin: 0 auto;   /* NEW */
-  height: auto;
-  border-radius: 0;
-  box-shadow: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: auto;
-  max-height: 100vh;
-}
+
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f1f1f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .m17 {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      padding: 30px 40px;
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: auto;
+    }
+
+    @media (min-width: 768px) {
+      .form-container {
+        max-width: 600px;
+        padding: 40px 50px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .form-container {
+        max-width: 700px;
+        padding: 50px 60px;
+      }
+    }
 
     .form-container h2 {
       text-align: center;
@@ -93,16 +117,17 @@ body {
       font-size: 14px;
     }
 
+    #pdfNote {
+      display: none;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+ 
 
 
-
-.m17 {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-}
-    
-    
   </style>
 </head>
 <body>
