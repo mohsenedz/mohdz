@@ -5,6 +5,9 @@
   <title>Booking Form</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
   <style>
 
@@ -129,7 +132,7 @@
 
 
   </style>
-</head>
+
 <body>
 
 
@@ -173,7 +176,7 @@
         <textarea id="message" name="message" rows="4" required></textarea>
       </div>
 
-      <div id="pdfNote" style="display: none; border: 1px solid #ccc; padding: 10px; margin-top: 20px;">
+      <div id="pdfNote" style="display: none; color:red;  padding: 10px; margin-top: 20px;">
   Please bring this booking confirmation with you to the clinic.  
 </div>
 
@@ -199,8 +202,13 @@
     const button = form.querySelector("button");
 
     if (firstName && lastName && email && message && appointment) {
-      alertBox.style.color = "green";
-      alertBox.textContent = "Booking submitted successfully! Generating PDF...";
+      await Swal.fire({
+  icon: 'success',
+  title: 'Booking Confirmed',
+  text: 'Generating your PDF now...',
+  timer: 2000,
+  showConfirmButton: false
+});
 
       // إخفاء الزر والإطار أثناء توليد PDF
       button.style.display = "none";
@@ -230,8 +238,11 @@
         alertBox.textContent = "";
       }, 3000);
     } else {
-      alertBox.style.color = "red";
-      alertBox.textContent = "Please fill in all fields.";
+      Swal.fire({
+  icon: 'error',
+  title: 'Incomplete Information',
+  text: 'Please fill in all the fields before submitting.'
+});
     }
   });
 </script>
